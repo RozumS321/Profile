@@ -1,0 +1,39 @@
+.border{
+    border: 1px solid #FFFFFF;
+    margin-right: 20px;
+}
+
+#name{
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+color: #fff;
+margin: 14px 0;
+margin-left: 20px;
+}
+
+.textH{
+text-transform: uppercase;
+color: #fff;
+font-size: 18px;
+font-weight: 600;
+}
+.textP{
+     font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+}
+
+
+.paper{
+background: linear-gradient(270deg, #1A78C2 0%, #1A78C2 101.06%);
+border-radius: 10px;
+height: 96px;
+display: flex;
+justify-content: space-between;
+padding: 0 20px;
+align-items: center;
+border-radius: 50%;
+}
+
