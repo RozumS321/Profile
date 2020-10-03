@@ -1,0 +1,2 @@
+export const PROFILE_CHANGE_EDIT = "PROFILE_CHANGE_EDIT";
+export const PROFILE_SAVE = "PROFILE_SAVE";
