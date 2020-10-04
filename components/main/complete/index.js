@@ -1,19 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
-  Box,
-  Avatar,
   Typography,
-  Container,
   Paper,
-  Button,
 } from "@material-ui/core/";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { deepPurple } from "@material-ui/core/colors";
-import IconButton from "@material-ui/core/IconButton";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import CallIcon from "@material-ui/icons/Call";
-import styles from "../../style.module.css";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function CompleteEdit({ profile, editProfile }) {
+function CompleteEdit({ profile }) {
   const classes = useStyles();
   const { email, telephone } = profile;
   return (
@@ -108,10 +100,6 @@ const mapStateToProps = (state) => {
     profile: state.profile,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    editProfile: () => dispatch(actions.editProfile()),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompleteEdit);
+
+export default connect(mapStateToProps, null)(CompleteEdit);
