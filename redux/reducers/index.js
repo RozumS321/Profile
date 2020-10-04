@@ -13,6 +13,11 @@ export default function reducersProfile(state = initialState, action) {
         ...state,
         profile: action.dataEdit,
       };
+    case constants.SET_PROFILE_DATA:
+      return {
+        ...state,
+        profile: action.data
+      }
     default:
       return state;
   }

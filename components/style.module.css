@@ -26,15 +26,6 @@ font-weight: 600;
 }
 
 
-.paper{
-background: linear-gradient(270deg, #1A78C2 0%, #1A78C2 101.06%);
-border-radius: 10px;
-height: 96px;
-display: flex;
-justify-content: space-between;
-padding: 0 20px;
-align-items: center;
-border-radius: 50%;
-}
+
 
 

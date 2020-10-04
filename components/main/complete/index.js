@@ -18,16 +18,14 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   large: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
-  },
-  small: {
     width: theme.spacing(5),
     height: theme.spacing(5),
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    color: " #00BFA5",
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+      color: " #00BFA5",
+    },
   },
   leftName: {
     display: "flex",
@@ -36,25 +34,34 @@ const useStyles = makeStyles((theme) => ({
   },
 
   data: {
-    fontSize: "18px",
+    fontSize: "1rem",
     fontWeight: "400",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: "1rem",
+    },
   },
   paperData: {
     borderBottom: "20px",
     borderRadius: "10px",
-    height: " 122px;",
+    height: "8rem;",
     display: "flex",
-    padding: "0 20px",
     alignItems: "center",
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      height: "4rem;",
+      justifyContent: 'space-around'
+
+    },
   },
+
 }));
 
-function CompleteEdit(props) {
+function CompleteEdit({ profile, editProfile }) {
   const classes = useStyles();
-  const { fullname, email, telephone } = props.profile;
+  const { email, telephone } = profile;
   return (
     <>
-      <Grid item xs={12}>
+      <Grid xs={12} style={{ paddingTop: '24px' }}>
         <Paper
           elevation={3}
           className={classes.paperData}
@@ -63,10 +70,16 @@ function CompleteEdit(props) {
             borderBottomRightRadius: "0px",
           }}
         >
-          <AlternateEmailIcon
-            style={{ color: " #00BFA5", marginRight: "45px" }}
-          />
-          <Typography className={classes.data}>{email}</Typography>
+          <Grid item xs={1} >
+            <AlternateEmailIcon
+              className={classes.large}
+            />
+          </Grid>
+
+          <Grid item xs={10}>
+            <Typography className={classes.data}>{email}</Typography>
+          </Grid>
+
         </Paper>
 
         <Paper
@@ -77,9 +90,14 @@ function CompleteEdit(props) {
             borderTopRightRadius: "0px",
           }}
         >
-          <CallIcon style={{ color: " #00BFA5", marginRight: "45px" }} />
-          <Typography className={classes.data}>{telephone}</Typography>
+          <Grid item xs={1} >
+            <CallIcon className={classes.large} />
+          </Grid >
+          <Grid item xs={10}>
+            <Typography className={classes.data}>{telephone}</Typography>
+          </Grid>
         </Paper>
+
       </Grid>
     </>
   );
@@ -90,5 +108,10 @@ const mapStateToProps = (state) => {
     profile: state.profile,
   };
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editProfile: () => dispatch(actions.editProfile()),
+  };
+};
 
-export default connect(mapStateToProps)(CompleteEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(CompleteEdit);

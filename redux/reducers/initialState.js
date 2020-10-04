@@ -1,8 +1,8 @@
 const initialState = {
   profile: {
-    fullName: "Иванова александра кто-то там",
+    fullName: "Иванова александра",
     email: "@mail.ru",
-    telephone: "+380950645017",
+    telephone: "+380991119922",
   },
   edit: false,
 };

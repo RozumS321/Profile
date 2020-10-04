@@ -1,5 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import reducersProfile from "../redux/reducers";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+
+
+const store = createStore(reducersProfile, applyMiddleware(thunk));
+
 
 export default function MyApp(props) {
     const { Component, pageProps } = props;
@@ -13,7 +21,9 @@ export default function MyApp(props) {
 
     return (
         <React.Fragment>
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Component {...pageProps} />
+            </Provider>
         </React.Fragment>
     );
 }

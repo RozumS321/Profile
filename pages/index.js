@@ -1,19 +1,28 @@
 import Header from "../components/header";
 import Main from "../components/main";
-import { Provider } from "react-redux";
-import reducersProfile from "../redux/reducers";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { useDispatch } from "react-redux";
+import { useEffect } from 'react'
+import * as constants from '../redux/constants'
 
-const store = createStore(reducersProfile, applyMiddleware(thunk));
 
 export default function Page() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    if (!user) return;
+
+    const profileData = JSON.parse(user);
+    dispatch({
+      type: constants.SET_PROFILE_DATA,
+      data: profileData
+    })
+  }, [])
+
   return (
-    <Provider store={store}>
-      <div style={{ background: "url(./header_bg.svg) center 0 no-repeat" }}>
-        <Header />
-        <Main />
-      </div>
-    </Provider>
+    <div style={{ background: "url(./header_bg.svg) center 0 no-repeat" }}>
+      <Header />
+      <Main />
+    </div>
   );
 }

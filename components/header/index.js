@@ -22,11 +22,30 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  paper: {
+    background: 'linear-gradient(270deg, #1A78C2 0%, #1A78C2 101.06%)',
+    borderRadius: '10px',
+    height: "8rem",
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0 20px',
+    alignItems: "center",
+    [theme.breakpoints.down('sm')]: {
+      height: "4em",
+    },
+
+  },
   large: {
     width: theme.spacing(10),
     height: theme.spacing(10),
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(5),
+      height: theme.spacing(5),
+      color: theme.palette.getContrastText(deepPurple[500]),
+      backgroundColor: deepPurple[500],
+    },
   },
   small: {
     width: theme.spacing(5),
@@ -38,28 +57,39 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     color: "#fff",
+    marginLeft: '1rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
   },
 
   email: {
     fontSize: "18px",
     fontWeight: "400",
   },
+
   paperData: {
     borderBottom: "20px",
     borderRadius: "10px",
-    height: " 128px;",
+    height: "17rem",
     display: "flex",
     padding: "0 20px",
     alignItems: "center",
   },
+  styleHide: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    },
+  }
 }));
 
 function Header({ profile, edit, editProfile }) {
   const classes = useStyles();
   const { fullName, email, telephone } = profile;
+  const initials = fullName.split(' ')
   return (
     <Container>
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         <Grid
           item
           xs={12}
@@ -73,8 +103,9 @@ function Header({ profile, edit, editProfile }) {
             <Avatar alt="avatar" className={classes.small} />
           </Button>
           <Box>
-            <Typography id={styles.name}>
-              {`${fullName[0]} ${fullName[1].substr(0, 1).toUpperCase()}.`}
+            <Typography id={styles.name} className={classes.styleHide}>
+
+              {initials.length <= 1 ? initials[0] : `${initials[0]} ${initials[1].substr(0, 1).toUpperCase()}.`}
             </Typography>
           </Box>
         </Grid>
@@ -85,36 +116,41 @@ function Header({ profile, edit, editProfile }) {
             Главная/личная страница
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Paper className={styles.paper}>
-            <Box className={classes.leftName}>
+
+        <Grid xs={12}>
+          <Paper className={classes.paper}>
+            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Avatar alt="Avatar" className={classes.large} />
-              <Typography style={{ fontSize: "24px", marginLeft: "42px" }}>
+              <Typography className={classes.leftName}>
                 {fullName}
               </Typography>
-            </Box>
+            </Grid>
 
-            <Box>
+            <Grid item>
               {edit ? (
-                <Button style={{ color: "#fff" }} onClick={() => editProfile()}>
-                  закрыть
-                  <IconButton style={{ color: "#fff" }} component="span">
+                <div style={{ display: 'flex' }}>
+                  <Button style={{ color: "#fff" }} className={classes.styleHide} onClick={() => editProfile()}>
+                    закрыть
+                  </Button>
+                  <IconButton style={{ color: "#fff" }} component="span" onClick={() => editProfile()}>
                     <CloseIcon />
                   </IconButton>
-                </Button>
+                </div>
               ) : (
-                <Button style={{ color: "#fff" }} onClick={() => editProfile()}>
-                  Редактировать
-                  <IconButton style={{ color: "#fff" }} component="span">
-                    <CreateIcon />
-                  </IconButton>
-                </Button>
-              )}
-            </Box>
+                  <div style={{ display: 'flex' }}>
+                    <Button style={{ color: "#fff" }} className={classes.styleHide} onClick={() => editProfile()}>
+                      Редактировать
+                  </Button>
+                    <IconButton style={{ color: "#fff" }} component="span" onClick={() => editProfile()} >
+                      <CreateIcon />
+                    </IconButton>
+                  </div>
+                )}
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
-    </Container>
+    </Container >
   );
 }
 
