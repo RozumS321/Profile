@@ -1,3 +1,8 @@
+Start Project:
+
+1. npm i && npm run nodeServer
+
+
 # Profile
 Nextjs,material-ui
 Для задачи испольльзовать next+react+material-ui
